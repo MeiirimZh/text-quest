@@ -8,7 +8,7 @@ from utils import move, take, use, talk
 
 
 class Chapter2(ChapterDefault):
-    def __init__(self, game_state_manager, current_scene):
+    def __init__(self, game_state_manager, current_scene, inventory):
         super().__init__(game_state_manager)
 
         self.chapter_name = "chapter_2"
@@ -30,6 +30,7 @@ class Chapter2(ChapterDefault):
         }
 
         self.current_scene = current_scene
+        self.inventory = inventory
 
     def run(self):
         self.print_header()

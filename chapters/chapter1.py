@@ -8,7 +8,7 @@ from utils import move, take, use, talk
 
 
 class Chapter1(ChapterDefault):
-    def __init__(self, game_state_manager, current_scene):
+    def __init__(self, game_state_manager, current_scene, inventory):
         super().__init__(game_state_manager)
 
         self.chapter_name = "chapter_1"
@@ -18,12 +18,13 @@ class Chapter1(ChapterDefault):
                      "choices": [{"text": "Go to forest", "action": lambda: move(self, "Forest")},
                                  {"text": "Stay at home", "action": lambda: move(self, "Home")}]},
             "Forest": {"text": "You're in forest",
-                       "choices": [{"text": "Go to deep forest", "action": lambda: use(self, "Mysterious scroll", lambda: move(self, "Deep Forest"))},
+                       "choices": [{"text": "Go to deep forest", "action": lambda: use(self, "Mysterious scroll", self.inventory, lambda: move(self, "Deep Forest"))},
                                    {"text": "Go back", "action": lambda: move(self, "Home")},
-                                   {"text": "Take a mysterious scroll", "action": lambda: take(self, "Mysterious scroll")}]},
+                                   {"text": "Take a mysterious scroll", "action": lambda: take(self, "Mysterious scroll", self.inventory)}]},
             "Deep Forest": {"text": "You're in deep forest. Suddenly you notice a person there.",
                             "choices": [{"text": '"Hello?"', "action": lambda: talk(self, "Hello")},
-                                        {"text": "Go back", "action": lambda: move(self, "Forest")}]},
+                                        {"text": "Go back", "action": lambda: move(self, "Forest")},
+                                        {"text": "Take a floating orb", "action": lambda: take(self, "Floating Orb", self.inventory)}]},
             "Hello": {"text": 'Stranger: "Hello stranger! I am a wizard, that can teleport people!"',
                       "choices": [{"text": '"Teleport me to my home"', "action": lambda: move(self, "Home")},
                                   {"text": '"Teleport me to forest"', "action": lambda: move(self, "Forest")},
@@ -31,6 +32,7 @@ class Chapter1(ChapterDefault):
         }
 
         self.current_scene = current_scene
+        self.inventory = inventory
 
     def run(self):
         self.print_header()

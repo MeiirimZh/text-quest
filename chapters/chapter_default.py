@@ -15,12 +15,10 @@ class ChapterDefault:
 
         self.message = ""
 
-        self.inventory = []
-
     def print_header(self):
         print(self.game_scenario[self.current_scene]["text"])
-        if self.inventory:
-            print(f'Inventory: {", ".join(self.inventory)}\n')
+        if self.inventory.inventory:
+            print(f'Inventory: {", ".join(self.inventory.inventory)}\n')
         else:
             print('Inventory: empty\n')
 

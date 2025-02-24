@@ -16,5 +16,6 @@ class Data:
         except FileNotFoundError:
             self.save({"current_chapter": "Chapter 1",
                        "chapter_1_scene": "Home",
-                       "chapter_2_scene": "Home 2"})
-            return {"current_chapter": "Chapter 1", "chapter_1_scene": "Home", "chapter_2_scene": "Home 2"}
+                       "chapter_2_scene": "Home 2",
+                       "inventory": []})
+            return {"current_chapter": "Chapter 1", "chapter_1_scene": "Home", "chapter_2_scene": "Home 2", "inventory": []}
